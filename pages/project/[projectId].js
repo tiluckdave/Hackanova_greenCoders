@@ -365,8 +365,7 @@ const AnalysisPage = ({ project }) => {
                     Power BI Embed
                 </CardHeader>
                 <CardBody>
-
-                    <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiZjQwZjQ0ZjktZjQwZS00ZjQ0LWI2ZjUtZjY0ZjQ2ZjQ4ZjQ2IiwidCI6IjYwZjY0ZjQwLWY0ZjktNDQ2Zi1hZjQxLWY0ZjQ2ZjQ4ZjQ2MiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    <iframe title="TestData4BI" width="1024px" height="2048px" src="https://app.powerbi.com/reportEmbed?reportId=b4170a61-6a51-41fc-949d-eeec23246a2f&autoAuth=true&ctid=6db5d98c-f3ca-4bde-a6b4-6013a4ebc94a" frameborder="0" allowFullScreen="true"></iframe>
                 </CardBody>
             </Card>
         </>
