@@ -1,38 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+OVERVIEW -
 
-## Getting Started
+This project is the submission of Hackanova 2.0 under open innovation track. The problem statement of this project is 'Analizing the Carbon Emmission due to tech-stacks used in IT industry'.
 
-First, run the development server:
+We are aware of carbon emmission due to all other factors and society seems to be stepping towards its deduction.But, very few are aware that the industry which seems to be clean and white can release more black(carbon).
+The use of IT software leads to significant energy, time and space consumption,
+which can result in a large amount of carbon emissions, either directly or
+indirectly. Currently, there is no established method for measuring and
+analyzing the carbon footprint of these software products, which are commonly
+used in our daily lives.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Our goal is to create an application that can evaluate and analyze the
+carbon emissions of various software products, and offer suggestions for
+reducing emissions by making adjustments to technical specifications
+without compromising the product's value.
+The application will be designed for both those who are planning to
+develop a software product and those who have already developed one,
+allowing users to set environmental protection goals before and after
+development.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+TOOLS USED - 
+● Data Collection: Web scraping techniques from industry reports and
+scientific journals.
+● Data Analysis & Visualization: Power BI
+● Database Management: Firebase
+● Application Development: Web Development using ReactJS and NextJS
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Using this project as the computer engineering professionals , we will be able to contribute to global efforts to combat the climate change .
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
