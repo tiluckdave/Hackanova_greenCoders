@@ -1,0 +1,107 @@
+{
+    "c": {
+        "AI/ML": "c",
+        "Blockchain": "c",
+        "App Development": "c",
+        "Web Development": "c",
+        "Command Line App": "c"
+    },
+    "rust": {
+        "AI/ML": "rust",
+        "Blockchain": "rust",
+        "App Development": "rust",
+        "Web Development": "rust",
+        "Command Line App": "c"
+    },
+    "c++": {
+        "AI/ML": "c++",
+        "Blockchain": "rust",
+        "App Development": "c++",
+        "Web Development": "c++",
+        "Command Line App": "c"
+    },
+    "java": {
+        "AI/ML": "c++",
+        "Blockchain": "rust",
+        "App Development": "c++",
+        "Web Development": "java",
+        "Command Line App": "c++"
+    },
+    "fortran": {
+        "AI/ML": "c++",
+        "Blockchain": "rust",
+        "App Development": "c++",
+        "Web Development": "fortran",
+        "Command Line App": "c"
+    },
+    "python": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "javascript",
+        "Command Line App": "c"
+    },
+    "javascript": {
+        "AI/ML": "javascript",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "go",
+        "Command Line App": "javascript"
+    },
+    "go": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "go",
+        "Command Line App": "c"
+    },
+    "php": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "php",
+        "Command Line App": "c"
+    },
+    "ruby": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "ruby",
+        "Command Line App": "c"
+    },
+    "swift": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "swift",
+        "Command Line App": "c"
+    },
+    "c#": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "c#",
+        "Command Line App": "c"
+    },
+    "dart": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "javascript",
+        "Command Line App": "c"
+    },
+    "typescript": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "javascript",
+        "Command Line App": "javascript"
+    },
+    "perl": {
+        "AI/ML": "go",
+        "Blockchain": "rust",
+        "App Development": "java",
+        "Web Development": "perl",
+        "Command Line App": "c"
+    }
+}

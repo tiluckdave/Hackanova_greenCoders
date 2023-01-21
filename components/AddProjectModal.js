@@ -32,28 +32,9 @@ const AddProjectModal = ({ children }) => {
     const auth = useAuth();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { handleSubmit, register } = useForm();
-    // const configuration = new Configuration({
-    //     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    // });
-    // const openai = new OpenAIApi(configuration);
-
-    // openai.createCompletion({
-    //     model: 'text-davinci-003',
-    //     prompt: `AI/ML, Blockchain, Web Development, App Development. From the description, what is the domain of this project?`,
-    //     maxTokens: 5,
-    //     temperature: 0.9,
-    //     topP: 1,
-    //     presencePenalty: 0,
-    //     frequencyPenalty: 0,
-    // }).then((data) => {
-
-    // }).catch((error) => {
-    //     console.error(error);
-    // })
 
     async function onCreateProject({ name, desc, github }) {
 
-        // get username/reponame from github url
         const repo = github.split('github.com/')[ 1 ]
         const res = await fetch(`https://api.github.com/repos/${repo}/languages`)
         const data = await res.json()
@@ -67,7 +48,7 @@ const AddProjectModal = ({ children }) => {
         // calculate the percentage of each language
         const languages = {}
         Object.keys(data).forEach((key) => {
-            languages[ key ] = ((data[ key ] / total) * 100).toFixed(2)
+            languages[ key.toLowerCase() ] = ((data[ key ] / total) * 100).toFixed(2)
         })
 
         const newProject = {
@@ -92,7 +73,7 @@ const AddProjectModal = ({ children }) => {
 
         openai.createCompletion({
             model: "text-davinci-003",
-            prompt: `AI/ML, Blockchain, Web Development, App Development. From these given options choose what suits best for the below description. ${desc}`,
+            prompt: `AI/ML, Blockchain, Web Development, App Development, Command Line App. From these given options choose what suits best for the below description. ${desc}`,
             temperature: 0.7,
             max_tokens: 256,
             top_p: 1,
@@ -119,70 +100,6 @@ const AddProjectModal = ({ children }) => {
             });
         })
     }
-
-    // const onCreateProject = ({ name, desc, github }) => {
-
-    //     // Get the languages used in the project from GitHub
-    //     // get username/reponame from github url
-    //     const repo = github.split('github.com/')[ 1 ]
-    //     fetch(`https://api.github.com/repos/${repo}/languages`)
-    //         .then(res => res.json())
-    //         .then(async (data) => {
-    //             setGithubData(data)
-    //             // calculate the total number of lines of code
-    //             let total = 0
-    //             for (let key in data) {
-    //                 total += data[ key ]
-    //             }
-    //             // calculate the percentage of each language
-    //             let languages = {}
-    //             Object.keys(data).forEach(key => {
-    //                 languages[ key ] = (data[ key ] / total * 100).toFixed(2)
-    //             })
-    //             setLanguages(languages)
-
-    //             // pass the description to OpenAI and get the domain
-    //             await setOpenaiData(openai.createCompletion({
-    //                 model: "text-davinci-003",
-    //                 prompt: `AI/ML, Blockchain, Web Development, App Development. From these given options choose what suits best for the below description. ${desc}`,
-    //                 temperature: 0.7,
-    //                 max_tokens: 5,
-    //                 top_p: 1,
-    //                 frequency_penalty: 0,
-    //                 presence_penalty: 0,
-    //             }))
-    //         })
-
-
-    //     const newProject = {
-    //         authorId: auth.user.uid,
-    //         createdAt: new Date().toISOString(),
-    //         name,
-    //         desc,
-    //         github,
-    //         language_lines: githubData,
-    //         languages_used: languages,
-    //         domain: openaiData
-    //     };
-
-    //     createProject(newProject);
-    //     toast({
-    //         title: 'Success!',
-    //         description: "We've added your project.",
-    //         status: 'success',
-    //         duration: 5000,
-    //         isClosable: true
-    //     });
-    //     mutate(
-    //         '/api/projects',
-    //         async (data) => ({
-    //             projects: [ newProject, ...data.projects ]
-    //         }),
-    //         false
-    //     );
-    //     onClose();
-    // };
-
 
 
     return <>
