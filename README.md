@@ -21,8 +21,11 @@ development.
 TOOLS USED - 
 ● Data Collection: Web scraping techniques from industry reports and
 scientific journals.
+
 ● Data Analysis & Visualization: Power BI
+
 ● Database Management: Firebase
+
 ● Application Development: Web Development using ReactJS and NextJS
 
 Using this project as the computer engineering professionals , we will be able to contribute to global efforts to combat the climate change .
