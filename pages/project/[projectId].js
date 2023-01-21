@@ -11,10 +11,10 @@ import { Engine } from 'json-rules-engine';
 import { getAllProjects, getProjectById } from "@/lib/db-admin";
 import { useEffect, useState } from "react";
 
-import Energy from '../../public/Energy.json'
-import Time from '../../public/Time.json'
-import Memory from '../../public/Memory.json'
-import Suggestion from '../../public/Suggestion.json'
+import Energy from '../rules/Energy.json'
+import Time from '../rules/Time.json'
+import Memory from '../rules/Memory.json'
+import Suggestion from '../rules/Suggestion.json'
 import { updateProjectByGithub } from "@/lib/db";
 import { set } from "date-fns";
 import ProjectShell from "@/components/ProjectShell";
@@ -26,7 +26,6 @@ export async function getStaticProps(context) {
         props: {
             project: project,
         },
-        revalidate: 5,
     }
 }
 
@@ -301,7 +300,7 @@ const AnalysisPage = ({ project }) => {
                 <Card>
                     <CardBody>
                         <Heading mb={2} size='md'>Reduced Energy Consumption</Heading>
-                        <Text>{project.suggestion_energy.total.toFixed(2) || ' '} unit</Text>
+                        <Text>{project.suggestion_energy.total || ' '} unit</Text>
                     </CardBody>
                 </Card>
                 <Card>
@@ -325,7 +324,7 @@ const AnalysisPage = ({ project }) => {
                     <StatGroup>
                         <Stat>
                             <StatLabel>Current Carbon Emmission</StatLabel>
-                            <StatNumber>{project.carbon_footprint.toFixed(2) || ' '}</StatNumber>
+                            <StatNumber>{project.carbon_footprint || ' '}</StatNumber>
                             <StatHelpText>
                                 <StatArrow type="increase" />
                                 0%
@@ -334,10 +333,10 @@ const AnalysisPage = ({ project }) => {
 
                         <Stat>
                             <StatLabel>After Carbon Emmission</StatLabel>
-                            <StatNumber>{project.suggestion_carbon_footprint.toFixed(2)}</StatNumber>
+                            <StatNumber>{project.suggestion_carbon_footprint}</StatNumber>
                             <StatHelpText>
                                 <StatArrow type="decrease" />
-                                {((project.suggestion_carbon_footprint - project.carbon_footprint) / project.carbon_footprint * 100).toFixed(2) || 0}%
+                                {((project.suggestion_carbon_footprint - project.carbon_footprint) / project.carbon_footprint * 100) || 0}%
                             </StatHelpText>
                         </Stat>
                     </StatGroup>
