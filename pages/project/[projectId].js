@@ -24,8 +24,9 @@ export async function getStaticProps(context) {
     const project = await getProjectById(projectId);
     return {
         props: {
-            project: project
+            project: project,
         },
+        revalidate: 5,
     }
 }
 
