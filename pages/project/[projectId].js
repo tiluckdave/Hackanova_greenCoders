@@ -1,7 +1,17 @@
-import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+    Box, Heading, Button, Tag, Link, Stack, StackDivider, Text, Card, CardHeader, CardBody, CardFooter, Stat,
+    StatLabel,
+    StatNumber,
+    StatHelpText,
+    StatArrow,
+    StatGroup,
+    SimpleGrid
+} from "@chakra-ui/react";
 import { Engine } from 'json-rules-engine';
 import { getAllProjects, getProjectById } from "@/lib/db-admin";
 import { useEffect, useState } from "react";
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 import Energy from '../../public/Energy.json'
 import Time from '../../public/Time.json'
@@ -9,6 +19,7 @@ import Memory from '../../public/Memory.json'
 import Suggestion from '../../public/Suggestion.json'
 import { updateProjectByGithub } from "@/lib/db";
 import { set } from "date-fns";
+import ProjectShell from "@/components/ProjectShell";
 
 export async function getStaticProps(context) {
     const projectId = context.params.projectId;
@@ -190,7 +201,10 @@ const AnalysisPage = ({ project }) => {
             suggestion_memory: ms,
             suggestion_carbon_footprint: cfs
         })
+
     }
+
+
 
 
     useEffect(() => {
@@ -202,16 +216,164 @@ const AnalysisPage = ({ project }) => {
 
     }, [])
 
-    return <Box display="flex" flexDirection="column" maxWidth="700px" width="full" margin="0 auto">
-        <Box>{project.name}</Box>
-        <Box>{project.github}</Box>
-        <Box>{project.desc}</Box>
-        <Box>{project.domain}</Box>
-        <Box>{JSON.stringify(suggestions)}</Box>
-        <Button onClick={calcPercentandTotal}>Calculate</Button>
-        {/* check if es is empty  then only show below button */}
-        <Button onClick={handleSubmission}>Submit</Button>
-    </Box >
+    // design an great ui in chakra ui to showcase all the analysis from database
+    return <ProjectShell>
+        <Card>
+            <CardHeader>
+                <Heading size='md'>Project Analysis</Heading>
+            </CardHeader>
+
+            <CardBody>
+                <Stack divider={<StackDivider />} spacing='4'>
+                    <Box>
+                        <Heading size='xs' textTransform='uppercase'>
+                            {project.name}
+                        </Heading>
+                        <Text pt='2' fontSize='sm'>
+                            {project.desc}
+                        </Text>
+                    </Box>
+                    <Box>
+                        <Heading size='xs' textTransform='uppercase'>
+                            GitHub Link
+                        </Heading>
+                        <Text pt='2' fontSize='sm'>
+                            <Link>
+                                {project.github}
+                            </Link>
+                        </Text>
+                    </Box>
+                    <Box>
+                        <Heading size='xs' textTransform='uppercase'>
+                            Current Technologies
+                        </Heading>
+                        <Text pt='2' fontSize='sm'>
+                            {Object.keys(project.languages_used).map((key) => {
+                                return <Tag key={key} size='md' colorScheme='green' mr='2'>{key}</Tag>
+                            })}
+                        </Text>
+                    </Box>
+                </Stack>
+            </CardBody>
+            <CardFooter>
+                <Button backgroundColor="#99FFFE"
+                    color="#194D4C"
+                    fontWeight="medium" onClick={calcPercentandTotal}>Calculate</Button>
+                <Button backgroundColor="#99FFFE" ml={2}
+                    color="#194D4C"
+                    fontWeight="medium" onClick={handleSubmission}>Suggest</Button>
+            </CardFooter>
+        </Card>
+        {project?.energy && project?.time && project?.memory && <>
+            <SimpleGrid spacing={4} mt={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))'>
+                <Card>
+                    <CardBody>
+                        <Heading mb={2} size='md'>Current Energy Consumption</Heading>
+                        <Text>{project?.energy.total || ''} unit</Text>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Heading mb={2} size='md'>Current Execution Time</Heading>
+                        <Text>{project?.time.total || ' '} unit</Text>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Heading mb={2} size='md'>Current Memory Usage</Heading>
+                        <Text>{project?.memory.total || ' '} unit</Text>
+                    </CardBody>
+                </Card>
+            </SimpleGrid>
+
+            <Card mt={4}>
+                <CardBody>
+                    <Heading mb={2} size='sm'>Suggested Technologies</Heading>
+                    <Text pt='2' fontSize='sm'>
+                        {Object.keys(project.suggestions).map((key) => {
+
+                            return <Tag key={key} size='md' colorScheme='green' mr='2'>{project.suggestions[ key ] || ""}</Tag>
+                        })}
+                    </Text>
+                </CardBody>
+            </Card>
+
+            <SimpleGrid spacing={4} mt={4} templateColumns='repeat(auto-fill, minmax(300px, 1fr))'>
+                <Card>
+                    <CardBody>
+                        <Heading mb={2} size='md'>Reduced Energy Consumption</Heading>
+                        <Text>{project.suggestion_energy.total.toFixed(2) || ' '} unit</Text>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Heading mb={2} size='md'>Reduced Execution Time</Heading>
+                        <Text>{project.suggestion_time.total || ' '} unit</Text>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Heading mb={2} size='md'>Reduced Memory Usage</Heading>
+                        <Text>{project.suggestion_memory.total || ' '} unit</Text>
+                    </CardBody>
+                </Card>
+            </SimpleGrid>
+
+            <Card mt={4}>
+                <CardBody>
+                    <Heading mb={4} size='sm'>Change in Carbon Emmission</Heading>
+
+                    <StatGroup>
+                        <Stat>
+                            <StatLabel>Current Carbon Emmission</StatLabel>
+                            <StatNumber>{project.carbon_footprint.toFixed(2) || ' '}</StatNumber>
+                            <StatHelpText>
+                                <StatArrow type="increase" />
+                                0%
+                            </StatHelpText>
+                        </Stat>
+
+                        <Stat>
+                            <StatLabel>After Carbon Emmission</StatLabel>
+                            <StatNumber>{project.suggestion_carbon_footprint.toFixed(2)}</StatNumber>
+                            <StatHelpText>
+                                <StatArrow type="decrease" />
+                                {((project.suggestion_carbon_footprint - project.carbon_footprint) / project.carbon_footprint * 100).toFixed(2) || 0}%
+                            </StatHelpText>
+                        </Stat>
+                    </StatGroup>
+                </CardBody>
+            </Card>
+            <Card align='center' mt={4}>
+                <CardHeader>
+                    <Heading size='md'> Visulization</Heading>
+                </CardHeader>
+                <CardBody>
+                    <Text>Download the below csv and import to Power BI to visualize</Text>
+                </CardBody>
+                <CardFooter>
+                    {/* link to analysis.xlsx file */}
+                    <a href='/analysis.xlsx' download>
+                        <Button backgroundColor="#99FFFE"
+                            color="#194D4C"
+                            fontWeight="medium">Download</Button>
+                    </a>
+
+                </CardFooter>
+            </Card>
+
+            <Card align='center' mt={4}>
+                <CardHeader>
+                    Power BI Embed
+                </CardHeader>
+                <CardBody>
+
+                    <iframe width="800" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiZjQwZjQ0ZjktZjQwZS00ZjQ0LWI2ZjUtZjY0ZjQ2ZjQ4ZjQ2IiwidCI6IjYwZjY0ZjQwLWY0ZjktNDQ2Zi1hZjQxLWY0ZjQ2ZjQ4ZjQ2MiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                </CardBody>
+            </Card>
+        </>
+        }
+    </ProjectShell >
 }
 
 export default AnalysisPage;

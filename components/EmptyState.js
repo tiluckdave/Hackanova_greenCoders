@@ -24,3 +24,14 @@ const EmptyState = () => (
 );
 
 export default EmptyState;
+
+// return <Box display="flex" flexDirection="column" maxWidth="700px" width="full" margin="0 auto">
+//         <Box>{project.name}</Box>
+//         <Box>{project.github}</Box>
+//         <Box>{project.desc}</Box>
+//         <Box>{project.domain}</Box>
+//         <Box>{JSON.stringify(suggestions)}</Box>
+//         <Button onClick={calcPercentandTotal}>Calculate</Button>
+//         {/* check if es is empty  then only show below button */}
+//         <Button onClick={handleSubmission}>Submit</Button>
+//     </Box >
