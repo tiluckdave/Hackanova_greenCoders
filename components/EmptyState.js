@@ -14,9 +14,9 @@ const EmptyState = () => (
         direction="column"
     >
         <Heading size="lg" mb={2}>
-            You haven't added any projects.
+            You have not added any projects.
         </Heading>
-        <Text mb={4}>Let's get started.</Text>
+        <Text mb={4}>Let us get started.</Text>
         <AddProjectModal>
             Add Your First Site
         </AddProjectModal>
