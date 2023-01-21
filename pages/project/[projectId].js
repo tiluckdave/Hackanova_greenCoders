@@ -10,8 +10,6 @@ import {
 import { Engine } from 'json-rules-engine';
 import { getAllProjects, getProjectById } from "@/lib/db-admin";
 import { useEffect, useState } from "react";
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
 
 import Energy from '../../public/Energy.json'
 import Time from '../../public/Time.json'
