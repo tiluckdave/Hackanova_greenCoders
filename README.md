@@ -19,6 +19,7 @@ allowing users to set environmental protection goals before and after
 development.
 
 TOOLS USED - 
+
 ● Data Collection: Web scraping techniques from industry reports and
 scientific journals.
 
